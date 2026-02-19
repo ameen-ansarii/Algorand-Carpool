@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // User profiles
+    match /users/{userId} {
+      // Anyone can read profiles (needed for ride driver info)
+      allow read: if true;
+      // Users can only write their own profile
+      allow create, update: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Rides collection
+    match /rides/{rideId} {
+      // Anyone can read rides (browse available rides)
+      allow read: if true;
+      // Authenticated users can create rides
+      allow create: if request.auth != null;
+      // Authenticated users can update rides (join, cancel, etc.)
+      allow update: if request.auth != null;
+      // Only the ride creator can delete
+      allow delete: if request.auth != null;
+    }
+  }
+}

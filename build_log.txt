@@ -1,0 +1,230 @@
+﻿.venv\Scripts\python.exe : 2026-02-19 19:17:49,601 INFO  
+    : Loading .env
+At line:1 char:51
++ ... log.txt", $(.venv\Scripts\python.exe -m 
+smart_contracts build 2>&1 |  ...
++                 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-02-19  
+   19:1... : Loading .env:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-02-19 19:17:49,606 INFO      : Building app at C:\Us
+ers\hp\Desktop\Algorand\ride-contract\smart_contracts\rid
+e_escrow\contract.py
+2026-02-19 19:17:49,608 INFO      : Exporting C:\Users\hp
+\Desktop\Algorand\ride-contract\smart_contracts\ride_escr
+ow\contract.py to C:\Users\hp\Desktop\Algorand\ride-contr
+act\smart_contracts\artifacts\ride_escrow
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\hp\Desktop\Algorand\ride-contract\smart_
+contracts\__main__.py", line 215, in <module>
+    main(sys.argv[1])
+  File "C:\Users\hp\Desktop\Algorand\ride-contract\smart_
+contracts\__main__.py", line 183, in main
+    build(artifact_path / contract.name, contract.path)
+  File "C:\Users\hp\Desktop\Algorand\ride-contract\smart_
+contracts\__main__.py", line 119, in build
+    raise Exception(f"Could not build 
+contract:\n{build_result.stdout}")
+Exception: Could not build contract:
+info: using puyapy version 5.7.1
+info: using python search path: ['C:\\Users\\hp\\AppData\
+\Local\\Programs\\Python\\Python312\\python312.zip', 'C:\
+\Users\\hp\\AppData\\Local\\Programs\\Python\\Python312\\
+DLLs', 'C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\
+Python312', 'C:\\Users\\hp\\Desktop\\Algorand\\ride-contr
+act\\.venv', 'C:\\Users\\hp\\Desktop\\Algorand\\ride-cont
+ract\\.venv\\Lib\\site-packages']
+smart_contracts\ride_escrow\contract.py:89 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+    driver_bytes = op.extract(data, 0, 32)
+                                                         
+                              ^~~~
+smart_contracts\ride_escrow\contract.py:90 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+    price = op.btoi(op.extract(data, 32, 8))
+                                                         
+                               ^~~~
+smart_contracts\ride_escrow\contract.py:91 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+    seats = op.btoi(op.extract(data, 40, 8))
+                                                         
+                               ^~~~
+smart_contracts\ride_escrow\contract.py:92 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+    taken = op.btoi(op.extract(data, 48, 8))
+                                                         
+                               ^~~~
+smart_contracts\ride_escrow\contract.py:93 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+    active = op.btoi(op.extract(data, 56, 8))
+                                                         
+                                ^~~~
+smart_contracts\ride_escrow\contract.py:136 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     driver = Account(op.extract(data, 0, 32))
+                                                         
+                                 ^~~~
+smart_contracts\ride_escrow\contract.py:137 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     price = op.btoi(op.extract(data, 32, 8))
+                                                         
+                                ^~~~
+smart_contracts\ride_escrow\contract.py:138 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     taken = op.btoi(op.extract(data, 48, 8))
+                                                         
+                                ^~~~
+smart_contracts\ride_escrow\contract.py:139 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     active = op.btoi(op.extract(data, 56, 8))
+                                                         
+                                 ^~~~
+smart_contracts\ride_escrow\contract.py:140 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     completed = op.btoi(op.extract(data, 64, 8))
+                                                         
+                                    ^~~~
+smart_contracts\ride_escrow\contract.py:157 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+info: using puyapy version 5.7.1
+info: using python search path: ['C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python312\\python312.zip', 'C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python312\\DLLs', 'C:\\Users\\hp\\AppData\\Local\\Programs\\Python\\Python312', 'C:\\Users\\hp\\Desktop\\Algorand\\ride-contract\\.venv', 'C:\\Users\\hp\\Desktop\\Algorand\\ride-contract\\.venv\\Lib\\site-packages']
+smart_contracts\ride_escrow\contract.py:89 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                             driver_bytes = op.extract(data, 0, 32)
+                                                                                       ^~~~
+smart_contracts\ride_escrow\contract.py:90 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                             price = op.btoi(op.extract(data, 32, 8))
+                                                                                        ^~~~
+smart_contracts\ride_escrow\contract.py:91 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                             seats = op.btoi(op.extract(data, 40, 8))
+                                                                                        ^~~~
+smart_contracts\ride_escrow\contract.py:92 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                             taken = op.btoi(op.extract(data, 48, 8))
+                                                                                        ^~~~
+smart_contracts\ride_escrow\contract.py:93 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                             active = op.btoi(op.extract(data, 56, 8))
+                                                                                         ^~~~
+smart_contracts\ride_escrow\contract.py:136 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              driver = Account(op.extract(data, 0, 32))
+                                                                                          ^~~~
+smart_contracts\ride_escrow\contract.py:137 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              price = op.btoi(op.extract(data, 32, 8))
+                                                                                         ^~~~
+smart_contracts\ride_escrow\contract.py:138 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                         
+         op.extract(data, 0, 48),
+                                                         
+                    ^~~~
+                                                              taken = op.btoi(op.extract(data, 48, 8))
+                                                                                         ^~~~
+smart_contracts\ride_escrow\contract.py:139 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              active = op.btoi(op.extract(data, 56, 8))
+                                                                                          ^~~~
+smart_contracts\ride_escrow\contract.py:140 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              completed = op.btoi(op.extract(data, 64, 8))
+                                                                                             ^~~~
+smart_contracts\ride_escrow\contract.py:157 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                                  op.extract(data, 0, 48),
+                                                                             ^~~~
+smart_contracts\ride_escrow\contract.py:178 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              driver = Account(op.extract(data, 0, 32))
+                                                                                          ^~~~
+smart_contracts\ride_escrow\contract.py:179 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              price = op.btoi(op.extract(data, 32, 8))
+                                                                                         ^~~~
+smart_contracts\ride_escrow\contract.py:180 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              taken = op.btoi(op.extract(data, 48, 8))
+                                                                                         ^~~~
+smart_contracts\ride_escrow\contract.py:181 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                              active = op.btoi(op.extract(data, 56, 8))
+                                                                                          ^~~~
+smart_contracts\ride_escrow\contract.py:192 error: Argument 1 to "Account" has incompatible type "bool"; expected "str | Bytes"  [arg-type]
+                                                                      rider = Account(p_data)
+                                                                                      ^~~~~~
+smart_contracts\ride_escrow\contract.py:203 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                                  op.extract(data, 0, 48),
+                                                                             ^~~~
+smart_contracts\ride_escrow\contract.py:208 error: Argument 1 to "extract" has incompatible type "bool"; expected "Bytes | bytes"  [arg-type]
+                                                                          op.extract(data, 64, 8),
+                                                                                     ^~~~
+
+An error occurred during compile. Please ensure that any supplied arguments are valid and any files passed are valid Algorand Python code before retrying.
+
+smart_contracts\ride_escrow\contract.py:178 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     driver = Account(op.extract(data, 0, 32))
+                                                         
+                                 ^~~~
+smart_contracts\ride_escrow\contract.py:179 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     price = op.btoi(op.extract(data, 32, 8))
+                                                         
+                                ^~~~
+smart_contracts\ride_escrow\contract.py:180 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     taken = op.btoi(op.extract(data, 48, 8))
+                                                         
+                                ^~~~
+smart_contracts\ride_escrow\contract.py:181 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+     active = op.btoi(op.extract(data, 56, 8))
+                                                         
+                                 ^~~~
+smart_contracts\ride_escrow\contract.py:192 error: 
+Argument 1 to "Account" has incompatible type "bool"; 
+expected "str | Bytes"  [arg-type]
+                                                         
+             rider = Account(p_data)
+                                                         
+                             ^~~~~~
+smart_contracts\ride_escrow\contract.py:203 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+         op.extract(data, 0, 48),
+                                                         
+                    ^~~~
+smart_contracts\ride_escrow\contract.py:208 error: 
+Argument 1 to "extract" has incompatible type "bool"; 
+expected "Bytes | bytes"  [arg-type]
+                                                         
+                 op.extract(data, 64, 8),
+                                                         
+                            ^~~~
+
+An error occurred during compile. Please ensure that any 
+supplied arguments are valid and any files passed are 
+valid Algorand Python code before retrying.
+
