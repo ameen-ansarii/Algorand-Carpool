@@ -523,7 +523,7 @@ export async function getRideCountOnChain(): Promise<number> {
             
             if (key === "ride_counter") {
                 // algosdk v3: value.uint is bigint — use Number() with nullish coalescing
-                const count = Number(value?.uint ?? 0n);
+                const count = Number(value?.uint ?? 0);
                 console.log(`✅ ride_counter found: ${count}`);
                 return count;
             }
@@ -557,7 +557,7 @@ export async function getTotalCompletedOnChain(): Promise<number> {
                 continue;
             }
             if (key === "total_completed") {
-                return Number(stateItem.value?.uint ?? 0n);
+                return Number(stateItem.value?.uint ?? 0);
             }
         }
         return 0;
