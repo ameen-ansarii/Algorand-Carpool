@@ -187,7 +187,22 @@ async function signAndSend(
 ): Promise<string> {
     const peraWallet = await getPeraWallet();
 
-    // Log connection state for debugging (don't throw – the mobile app handles auth)
+    // CRITICAL FIX: Check if wallet is actually connected before signing
+    if (!peraWallet.isConnected || !peraWallet.connector) {
+        console.log("🔄 Pera Wallet not connected, attempting to reconnect...");
+        try {
+            const accounts = await peraWallet.reconnectSession();
+            if (!accounts || accounts.length === 0) {
+                throw new Error("Please reconnect your wallet. Click 'Connect Wallet' and try again.");
+            }
+            console.log("✅ Wallet reconnected successfully!");
+        } catch (error) {
+            console.error("❌ Failed to reconnect wallet:", error);
+            throw new Error("Wallet connection lost. Please disconnect and reconnect your wallet.");
+        }
+    }
+
+    // Log connection state for debugging
     const connectedAccounts: string[] = peraWallet.connector?.accounts || [];
     console.log("📱 Pera Wallet state — isConnected:", peraWallet.isConnected, "accounts:", connectedAccounts);
 
@@ -319,8 +334,9 @@ export async function createRideOnChain(
         ],
         boxes: [
             // Declare the box that will be created: "r" + nextRideId
+            // Use appIndex: 0 to reference the current app's boxes
             {
-                appIndex: BigInt(APP_ID),
+                appIndex: 0,
                 name: boxName
             },
         ],
@@ -384,14 +400,14 @@ export async function joinRideOnChain(
     const methodSelector = getMethodSelector("join_ride(uint64,pay)void");
     const rideIdBytes = algosdk.encodeUint64(rideId);
 
-    // Build box references
+    // Build box references - use appIndex: 0 for current app
     const boxes = [
-        { appIndex: BigInt(APP_ID), name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
+        { appIndex: 0, name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
     ];
     // Add passenger box refs (up to 6 seats)
     for (let i = 0; i < 6; i++) {
         boxes.push({
-            appIndex: BigInt(APP_ID),
+            appIndex: 0,
             name: new Uint8Array([112, ...algosdk.encodeUint64(rideId), ...algosdk.encodeUint64(i)]),
         });
     }
@@ -428,7 +444,7 @@ export async function completeRideOnChain(
         onComplete: algosdk.OnApplicationComplete.NoOpOC,
         appArgs: [methodSelector, algosdk.encodeUint64(rideId)],
         boxes: [
-            { appIndex: BigInt(APP_ID), name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
+            { appIndex: 0, name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
         ],
         suggestedParams,
     });
@@ -452,11 +468,11 @@ export async function cancelRideOnChain(
     const methodSelector = getMethodSelector("cancel_ride(uint64)void");
 
     const boxes = [
-        { appIndex: BigInt(APP_ID), name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
+        { appIndex: 0, name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
     ];
     for (let i = 0; i < Math.max(numPassengers, 1); i++) {
         boxes.push({
-            appIndex: BigInt(APP_ID),
+            appIndex: 0,
             name: new Uint8Array([112, ...algosdk.encodeUint64(rideId), ...algosdk.encodeUint64(i)]),
         });
     }
@@ -481,6 +497,7 @@ export async function cancelRideOnChain(
 export async function getRideCountOnChain(): Promise<number> {
     try {
         const appInfo = await algodClient.getApplicationByID(BigInt(APP_ID)).do();
+        // algosdk v3: globalState is on params, keys are Uint8Array, uint values are bigint
         const globalState = (appInfo as any).params?.globalState || [];
 
         console.log(`🔍 Reading global state, found ${globalState.length} keys`);
@@ -488,12 +505,16 @@ export async function getRideCountOnChain(): Promise<number> {
         for (const stateItem of globalState) {
             let key: string;
             try {
-                // Decode base64 key safely
-                const base64Key = stateItem.key;
-                const decodedBytes = Uint8Array.from(atob(base64Key), c => c.charCodeAt(0));
-                key = new TextDecoder().decode(decodedBytes);
+                // algosdk v3: key is already Uint8Array (raw bytes), NOT base64
+                if (stateItem.key instanceof Uint8Array) {
+                    key = new TextDecoder().decode(stateItem.key);
+                } else {
+                    // Fallback for base64 string (algosdk v2 compat)
+                    const decodedBytes = Uint8Array.from(atob(stateItem.key), c => c.charCodeAt(0));
+                    key = new TextDecoder().decode(decodedBytes);
+                }
             } catch (e) {
-                console.warn(`⚠️ Failed to decode key: ${stateItem.key}`, e);
+                console.warn(`⚠️ Failed to decode key:`, stateItem.key, e);
                 continue;
             }
             
@@ -501,8 +522,8 @@ export async function getRideCountOnChain(): Promise<number> {
             console.log(`  - Key: "${key}", Value type: ${value?.type}, uint: ${value?.uint}`);
             
             if (key === "ride_counter") {
-                // value.uint is a BigInt, convert to number
-                const count = value?.uint ? Number(value.uint) : 0;
+                // algosdk v3: value.uint is bigint — use Number() with nullish coalescing
+                const count = Number(value?.uint ?? 0n);
                 console.log(`✅ ride_counter found: ${count}`);
                 return count;
             }
@@ -521,12 +542,22 @@ export async function getRideCountOnChain(): Promise<number> {
 export async function getTotalCompletedOnChain(): Promise<number> {
     try {
         const appInfo = await algodClient.getApplicationByID(BigInt(APP_ID)).do();
+        // algosdk v3: globalState keys are Uint8Array, uint values are bigint
         const globalState = (appInfo as any).params?.globalState || [];
 
         for (const stateItem of globalState) {
-            const key = atob(stateItem.key);
+            let key: string;
+            try {
+                if (stateItem.key instanceof Uint8Array) {
+                    key = new TextDecoder().decode(stateItem.key);
+                } else {
+                    key = atob(stateItem.key);
+                }
+            } catch {
+                continue;
+            }
             if (key === "total_completed") {
-                return stateItem.value?.uint ?? 0;
+                return Number(stateItem.value?.uint ?? 0n);
             }
         }
         return 0;
@@ -552,13 +583,13 @@ export async function cancelBookingOnChain(
 
     const methodSelector = getMethodSelector("cancel_booking(uint64)void");
 
-    // Build box references (ride + all possible passenger slots)
+    // Build box references (ride + all possible passenger slots) - use appIndex: 0
     const boxes = [
-        { appIndex: BigInt(APP_ID), name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
+        { appIndex: 0, name: new Uint8Array([114, ...algosdk.encodeUint64(rideId)]) },
     ];
     for (let i = 0; i < 6; i++) {
         boxes.push({
-            appIndex: BigInt(APP_ID),
+            appIndex: 0,
             name: new Uint8Array([112, ...algosdk.encodeUint64(rideId), ...algosdk.encodeUint64(i)]),
         });
     }

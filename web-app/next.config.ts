@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  turbopack: {},
   serverExternalPackages: ["algosdk"],
+  // Handle ESM packages
+  transpilePackages: ["@perawallet/connect"],
 };
 
 export default nextConfig;

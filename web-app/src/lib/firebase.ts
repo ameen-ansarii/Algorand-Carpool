@@ -12,7 +12,7 @@ import {
     type User,
 } from "firebase/auth";
 import {
-    getFirestore,
+    initializeFirestore,
     doc,
     setDoc,
     getDoc,
@@ -43,7 +43,10 @@ const firebaseConfig = {
 // Initialize Firebase (prevent duplicate initialization)
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
-const db = getFirestore(app);
+// Use initializeFirestore with long-polling fallback to avoid QUIC_NETWORK_IDLE_TIMEOUT errors
+const db = initializeFirestore(app, {
+    experimentalAutoDetectLongPolling: true,
+});
 const googleProvider = new GoogleAuthProvider();
 
 // Configure auth persistence to remember users across sessions
@@ -398,6 +401,8 @@ export function onRideUpdate(rideId: string, callback: (ride: Ride | null) => vo
         } else {
             callback(null);
         }
+    }, (error) => {
+        console.warn("Firestore listener (ride) reconnecting:", error.code);
     });
 }
 
@@ -406,6 +411,8 @@ export function onAvailableRidesUpdate(callback: (rides: Ride[]) => void) {
     const q = query(ridesRef, where("status", "==", "open"), orderBy("createdAt", "desc"));
     return onSnapshot(q, (snapshot) => {
         callback(snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Ride)));
+    }, (error) => {
+        console.warn("Firestore listener (available rides) reconnecting:", error.code);
     });
 }
 
@@ -414,6 +421,8 @@ export function onUserRidesUpdate(uid: string, callback: (rides: Ride[]) => void
     const q = query(ridesRef, where("driverId", "==", uid));
     return onSnapshot(q, (snapshot) => {
         callback(snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Ride)));
+    }, (error) => {
+        console.warn("Firestore listener (user rides) reconnecting:", error.code);
     });
 }
 
@@ -422,6 +431,8 @@ export function onRiderBookingsUpdate(uid: string, callback: (rides: Ride[]) => 
     const q = query(ridesRef, where("passengers", "array-contains", uid));
     return onSnapshot(q, (snapshot) => {
         callback(snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as Ride)));
+    }, (error) => {
+        console.warn("Firestore listener (rider bookings) reconnecting:", error.code);
     });
 }
 
@@ -516,6 +527,8 @@ export function onPendingRequestsUpdate(callback: (requests: RideRequest[]) => v
     );
     return onSnapshot(q, (snap) => {
         callback(snap.docs.map((d) => ({ id: d.id, ...d.data() } as RideRequest)));
+    }, (error) => {
+        console.warn("Firestore listener (pending requests) reconnecting:", error.code);
     });
 }
 
@@ -526,6 +539,8 @@ export function onDriverActiveRequestsUpdate(driverId: string, callback: (reques
     );
     return onSnapshot(q, (snap) => {
         callback(snap.docs.map((d) => ({ id: d.id, ...d.data() } as RideRequest)));
+    }, (error) => {
+        console.warn("Firestore listener (driver requests) reconnecting:", error.code);
     });
 }
 
@@ -537,6 +552,8 @@ export function onRiderRequestsUpdate(riderId: string, callback: (requests: Ride
     );
     return onSnapshot(q, (snap) => {
         callback(snap.docs.map((d) => ({ id: d.id, ...d.data() } as RideRequest)));
+    }, (error) => {
+        console.warn("Firestore listener (rider requests) reconnecting:", error.code);
     });
 }
 
