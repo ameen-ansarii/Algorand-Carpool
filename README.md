@@ -31,7 +31,7 @@ Centralized ride-sharing platforms like Uber and Lyft charge drivers 25-30% comm
 
 | Resource | Link |
 |----------|------|
-| **🚀 Live Demo URL** | _____________________________ *(Add your Vercel/Netlify URL here)* |
+| **🚀 Live Demo URL** | https://algorand-carpooll.vercel.app/ |
 | **🎥 LinkedIn Demo Video** | _____________________________ *(Add your LinkedIn post URL here)* ⚠️ *Must tag: https://www.linkedin.com/company/rift-pwioi/* |
 | **📜 Smart Contract (Testnet)** | **App ID: [755794423](https://testnet.explorer.perawallet.app/application/755794423)** |
 | **🔍 Testnet Explorer** | https://testnet.explorer.perawallet.app/application/755794423 |
