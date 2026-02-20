@@ -240,7 +240,7 @@ vercel
 ### For Riders
 
 #### Step 1: Connect Wallet
-1. Open the RIDE web app
+1. Open the PeerPool web app
 2. Click **"Connect Wallet"** in the navigation bar
 3. Select **Pera Wallet** (ensure you have the mobile app installed)
 4. Scan the QR code or use WalletConnect
