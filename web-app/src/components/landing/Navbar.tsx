@@ -48,7 +48,7 @@ export default function Navbar({ onLaunch }: NavbarProps) {
                         </svg>
                     </div>
                     <span className="text-lg font-bold tracking-tight text-foreground">
-                        RIDE
+                        PeerPool
                     </span>
                     <span className="ml-1 rounded-full bg-brand/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-brand"
                         style={{ color: "oklch(0.75 0.18 168)" }}

@@ -8,7 +8,7 @@ const faqs = [
     {
         question: "What wallets are supported?",
         answer:
-            "RIDE currently supports Pera Wallet and Defly Wallet — the two most popular Algorand wallets. Simply scan a QR code or use the browser extension to connect. We're working on adding support for Exodus and other multi-chain wallets.",
+            "PeerPool currently supports Pera Wallet and Defly Wallet — the two most popular Algorand wallets. Simply scan a QR code or use the browser extension to connect. We're working on adding support for Exodus and other multi-chain wallets.",
     },
     {
         question: "How does the trustless escrow work?",
@@ -16,14 +16,14 @@ const faqs = [
             "When a rider confirms a ride, their ALGO payment is locked in a smart contract on the Algorand blockchain. Neither the driver nor the rider can access the funds during the ride. Once the ride is marked as complete (verified by GPS proximity and both parties), the contract automatically releases the payment to the driver. No middlemen, no disputes — just code.",
     },
     {
-        question: "What fees does RIDE charge?",
+        question: "What fees does PeerPool charge?",
         answer:
-            "Zero. RIDE Protocol charges exactly 0% commission. The only cost is the Algorand network transaction fee, which is less than 0.001 ALGO (fractions of a cent). Drivers keep 100% of their earnings. This is possible because the protocol is open-source and community-governed.",
+            "Zero. PeerPool Protocol charges exactly 0% commission. The only cost is the Algorand network transaction fee, which is less than 0.001 ALGO (fractions of a cent). Drivers keep 100% of their earnings. This is possible because the protocol is open-source and community-governed.",
     },
     {
         question: "Is my personal data stored anywhere?",
         answer:
-            "No. RIDE operates on a zero-knowledge principle. Your wallet address is your only identity. We don't store names, phone numbers, emails, or location history. Ride data is recorded on-chain as transaction hashes — private, anonymous, and sovereign. You own your data.",
+            "No. PeerPool operates on a zero-knowledge principle. Your wallet address is your only identity. We don't store names, phone numbers, emails, or location history. Ride data is recorded on-chain as transaction hashes — private, anonymous, and sovereign. You own your data.",
     },
     {
         question: "How fast are payments settled?",
@@ -36,12 +36,12 @@ const faqs = [
             "The smart contract handles dispute resolution algorithmically. If a ride isn't completed (e.g., the driver doesn't reach the destination), the escrow automatically refunds the rider. For edge cases, a community arbitration system using staked governance tokens is on our roadmap for Q1 2027.",
     },
     {
-        question: "Can I use RIDE without crypto knowledge?",
+        question: "Can I use PeerPool without crypto knowledge?",
         answer:
-            "Absolutely. While RIDE is built on blockchain, we've designed the UX to feel as simple as Uber. Connect your wallet, find a ride, and pay — the blockchain complexity is invisible. We're also building fiat on-ramp support so users can pay with credit cards seamlessly.",
+            "Absolutely. While PeerPool is built on blockchain, we've designed the UX to feel as simple as Uber. Connect your wallet, find a ride, and pay — the blockchain complexity is invisible. We're also building fiat on-ramp support so users can pay with credit cards seamlessly.",
     },
     {
-        question: "Is RIDE open source?",
+        question: "Is PeerPool open source?",
         answer:
             "Yes, 100%. All smart contracts, frontend code, and protocol documentation are open source on GitHub. We believe transparency is non-negotiable in Web3. Anyone can audit the code, contribute, or fork the protocol.",
     },
@@ -91,7 +91,7 @@ export default function FAQ() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="mt-6 text-muted-foreground font-light leading-relaxed"
                         >
-                            Everything you need to know about RIDE Protocol, trustless escrow,
+                            Everything you need to know about PeerPool Protocol, trustless escrow,
                             and decentralized mobility. Can't find your answer?{" "}
                             <a
                                 href="#"

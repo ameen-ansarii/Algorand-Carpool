@@ -290,11 +290,12 @@ export async function createRideOnChain(
     const appAddress = getAppAddress();
 
     // Calculate MBR for boxes (minimum balance requirement)
-    // Box MBR = 2,500 + 400 × bytes per box
-    const rideBoxSize = 72;
-    const rideBoxMBR = 2500 + (400 * rideBoxSize);
+    // Box MBR = 2,500 + 400 × (key_size + value_size)
+    const rideBoxKeySize = 9; // "r" (1 byte) + ride_id (8 bytes)
+    const rideBoxValueSize = 72; // ride data
+    const rideBoxMBR = 2500 + (400 * (rideBoxKeySize + rideBoxValueSize));
     
-    console.log(`💰 Sending ${rideBoxMBR} µALGO to app for box storage`);
+    console.log(`💰 Sending ${rideBoxMBR} µALGO to app for box storage (key: ${rideBoxKeySize} + value: ${rideBoxValueSize} bytes)`);
 
     // Transaction 1: Fund the app's minimum balance for box storage
     const fundingTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
@@ -366,11 +367,17 @@ export async function joinRideOnChain(
     const priceInMicroAlgo = Math.floor(priceInAlgo * 1_000_000);
     const appAddress = getAppAddress();
 
-    // Payment transaction to the contract
+    // Calculate MBR for passenger box
+    // Passenger box: "p" + ride_id (8) + index (8) = 17 bytes key, 32 bytes value (address)
+    const passengerBoxMBR = 2500 + (400 * (17 + 32)); // = 22,100 µALGO
+    
+    console.log(`💰 Payment: ${priceInMicroAlgo} µALGO (ride price) + ${passengerBoxMBR} µALGO (box MBR) = ${priceInMicroAlgo + passengerBoxMBR} µALGO total`);
+
+    // Payment transaction to the contract (ride price + box MBR)
     const paymentTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
         sender: senderAddress,
         receiver: appAddress,
-        amount: BigInt(priceInMicroAlgo),
+        amount: BigInt(priceInMicroAlgo + passengerBoxMBR),
         suggestedParams,
     });
 

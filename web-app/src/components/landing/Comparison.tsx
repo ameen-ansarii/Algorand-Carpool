@@ -17,7 +17,7 @@ function RideLogo() {
                 </svg>
             </div>
             <div>
-                <span className="text-base font-bold text-foreground">RIDE</span>
+                <span className="text-base font-bold text-foreground">PeerPool</span>
                 <span
                     className="ml-1.5 rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider"
                     style={{ background: "oklch(0.75 0.18 168 / 0.15)", color: "oklch(0.75 0.18 168)" }}
@@ -150,7 +150,7 @@ export default function Comparison() {
                         transition={{ duration: 0.6 }}
                         className="inline-flex items-center rounded-full border border-border bg-background/50 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur-md mb-6"
                     >
-                        Why RIDE?
+                        Why PeerPool?
                     </motion.div>
 
                     <motion.h2
@@ -172,7 +172,7 @@ export default function Comparison() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="mt-6 mx-auto max-w-lg text-lg text-muted-foreground font-light"
                     >
-                        See how RIDE Protocol stacks up against legacy ride-sharing platforms.
+                        See how PeerPool Protocol stacks up against legacy ride-sharing platforms.
                     </motion.p>
                 </div>
 

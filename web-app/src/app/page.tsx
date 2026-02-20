@@ -106,7 +106,7 @@ export default function Home() {
               />
             </svg>
           </div>
-          <p className="text-sm text-muted-foreground">Loading RIDE...</p>
+          <p className="text-sm text-muted-foreground">Loading PeerPool...</p>
         </div>
       </div>
     );

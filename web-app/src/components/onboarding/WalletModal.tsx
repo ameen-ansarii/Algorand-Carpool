@@ -110,7 +110,7 @@ export default function WalletModal({ open, onClose, onConnect }: WalletModalPro
                         {/* Custom Logo & Header */}
                         <div className="relative mb-6 text-center">
                             <h1 className="font-sans text-3xl font-black tracking-tighter italic" style={{ fontVariationSettings: '"slant" -10' }}>
-                                RIDE
+                                PeerPool
                             </h1>
                             <p className="mt-1 text-xs font-medium text-muted-foreground tracking-wide uppercase opacity-70">
                                 {mode === "signin" ? "Welcome Back" : "Join the Revolution"}

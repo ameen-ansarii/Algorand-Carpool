@@ -48,7 +48,7 @@ export default function Footer() {
                                     />
                                 </svg>
                             </div>
-                            <span className="text-lg font-bold tracking-tight">RIDE</span>
+                            <span className="text-lg font-bold tracking-tight">PeerPool</span>
                         </div>
 
                         <p className="text-sm text-muted-foreground font-light leading-relaxed max-w-xs mb-6">
@@ -112,7 +112,7 @@ export default function Footer() {
             <div className="border-t border-border">
                 <div className="container mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-xs text-muted-foreground/60">
-                        © 2026 RIDE Protocol. Built on Algorand. All rights reserved.
+                        © 2026 PeerPool Protocol. Built on Algorand. All rights reserved.
                     </p>
                     <div className="flex items-center gap-2">
                         <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />

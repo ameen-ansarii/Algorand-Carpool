@@ -24,7 +24,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "RIDE | Decentralized Mobility on Algorand",
+  title: "PeerPool | Decentralized Mobility on Algorand",
   description:
     "The next-generation Web3 ride-sharing protocol built on Algorand. Zero fees, trustless escrow, instant settlement.",
 };

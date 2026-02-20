@@ -283,7 +283,7 @@ export function getEstimatedDistance(origin: string, destination: string): numbe
     return Math.floor(Math.random() * 15) + 3; // fallback 3-18km
 }
 
-// ==================== RIDE CRUD ====================
+// ==================== PeerPool CRUD ====================
 
 export async function postRide(ride: Omit<Ride, "id" | "createdAt">) {
     const ridesRef = collection(db, "rides");
@@ -353,7 +353,7 @@ export async function deleteRide(rideId: string) {
     await deleteDoc(rideRef);
 }
 
-// ==================== RIDE REVIEWS ====================
+// ==================== PeerPool REVIEWS ====================
 
 export interface RideReview {
     id?: string;
@@ -425,7 +425,7 @@ export function onRiderBookingsUpdate(uid: string, callback: (rides: Ride[]) => 
     });
 }
 
-// ==================== RIDE REQUESTS (Uber model) ====================
+// ==================== PeerPool REQUESTS (Uber model) ====================
 // Riders post requests → Drivers see and accept → Rider pays escrow → Driver completes
 
 export interface RideRequest {
