@@ -1,8 +1,8 @@
-# RIDE - Decentralized Ride Sharing on Algorand
+# PeerPool - Decentralized Ride Sharing on Algorand
 
 ## 🚗 Project Overview
 
-**RIDE** is a decentralized ride-sharing platform built on the **Algorand Blockchain** that enables direct, trustless coordination between drivers and riders without intermediaries. Using smart contracts for escrow payments, RIDE ensures transparency, reduces fees, and provides automatic refunds — all powered by Algorand's fast, secure, and low-cost infrastructure.
+**PeerPool** is a decentralized ride-sharing platform built on the **Algorand Blockchain** that enables direct, trustless coordination between drivers and riders without intermediaries. Using smart contracts for escrow payments, RIDE ensures transparency, reduces fees, and provides automatic refunds, all powered by Algorand's fast, secure, and low cost infrastructure.
 
 ### Key Features
 - **🔒 Trustless Escrow Payments:** Riders' funds are locked in a smart contract and only released to the driver upon successful ride completion
@@ -17,13 +17,13 @@
 
 **Selected from RIFT 2026 Hackathon: Decentralized Finance (DeFi) / P2P Transportation**
 
-Centralized ride-sharing platforms like Uber and Lyft charge drivers 25-30% commission on every ride, impose opaque pricing algorithms, and maintain complete control over user funds. This creates:
+Centralized ride sharing platforms like Uber and Lyft charge drivers 25-30% commission on every ride, impose opaque pricing algorithms, and maintain complete control over user funds. This creates:
 - **High Fees:** Drivers lose significant income to platform fees
 - **Lack of Trust:** Centralized payment processing with no transparency
 - **Single Point of Failure:** Platform outages can halt entire operations
 - **Data Privacy Concerns:** Personal and financial data controlled by corporations
 
-**RIDE's Solution:** By leveraging Algorand smart contracts as an escrow layer, RIDE eliminates the middleman, reduces fees to near-zero (only network fee), and ensures trustless, transparent coordination between drivers and riders.
+**PeerPool's Solution:** By leveraging Algorand smart contracts as an escrow layer, RIDE eliminates the middleman, reduces fees to near-zero (only network fee), and ensures trustless, transparent coordination between drivers and riders.
 
 ---
 
@@ -35,7 +35,7 @@ Centralized ride-sharing platforms like Uber and Lyft charge drivers 25-30% comm
 | **🎥 LinkedIn Demo Video** | _____________________________ *(Add your LinkedIn post URL here)* ⚠️ *Must tag: https://www.linkedin.com/company/rift-pwioi/* |
 | **📜 Smart Contract (Testnet)** | **App ID: [755794423](https://testnet.explorer.perawallet.app/application/755794423)** |
 | **🔍 Testnet Explorer** | https://testnet.explorer.perawallet.app/application/755794423 |
-| **📂 GitHub Repository** | _____________________________ *(Add your GitHub repo URL here)* |
+| **📂 GitHub Repository** | https://github.com/ameen-ansarii/Algorand-Carpool/ |
 
 ---
 
@@ -90,10 +90,10 @@ Centralized ride-sharing platforms like Uber and Lyft charge drivers 25-30% comm
 | `cancel_ride(ride_id)` | Driver cancels the ride | Driver | Refunds all passengers, driver pays 0.1 ALGO penalty per rider |
 | `cancel_booking(ride_id)` | Rider cancels their booking | Rider | Refunds rider minus 0.1 ALGO penalty (goes to driver) |
 
-### Data Flow Example: Join Ride
+### Data Flow Example: Join PeerPool
 
 ```
-1. Rider clicks "Join Ride" in UI
+1. Rider clicks "Join PeerPool" in UI
 2. Frontend constructs Atomic Transaction Group:
    ├─ Payment Txn: Rider → Contract (fare + box MBR)
    └─ App Call Txn: join_ride(ride_id, pay)
@@ -402,9 +402,7 @@ This project is open-source and available under the MIT License.
 ## 📞 Support & Contact
 
 For questions, issues, or collaboration:
-- **GitHub Issues:** [Open an issue](https://github.com/YOUR_USERNAME/YOUR_REPO/issues)
-- **Email:** your.email@example.com
-- **Discord:** YourDiscord#1234
+- **Email:** 12ameenansari34@gmail.com
 
 ---
 
